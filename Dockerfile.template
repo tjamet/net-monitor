@@ -4,6 +4,5 @@ FROM ${base}
 
 RUN wget -O - https://bintray.com/ookla/download/download_file?file_path=ookla-speedtest-1.0.0-$(uname -m)-linux.tgz | tar xzvf -
 RUN mv speedtest /
-#RUN echo '0  */2  *  *  *    /speedtest --accept-license --accept-gdpr -o json > /tmp/speedtest-$(date +"%Y-%m-%d-%H-%M").json' > /etc/crontabs/root
-RUN echo '0  */2  *  *  *    /speedtest --accept-license --accept-gdpr -o json' > /etc/crontabs/root
+COPY crontab /etc/crontabs/root
 ENTRYPOINT ["crond", "-f"]
