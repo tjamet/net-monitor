@@ -1,8 +1,21 @@
 ARG base=balenalib/%%BALENA_MACHINE_NAME%%-alpine
+ARG golang=balenalib/%%BALENA_MACHINE_NAME%%-golang:1.12
+
+FROM ${golang} as build
+
+RUN mkdir /src
+WORKDIR /src
+COPY go.* /src/
+RUN go mod tidy
+COPY pkg /src/pkg
+COPY bin /src/bin
+RUN go build -a -tags netgo -ldflags '-w' -o /bin/monitor bin/net-monitor/main.go
+
+FROM ${base} as speedtest
+RUN wget -O - https://bintray.com/ookla/download/download_file?file_path=ookla-speedtest-1.0.0-$(uname -m)-linux.tgz | tar xzvf -
+RUN mv speedtest /bin/speedtest
 
 FROM ${base}
-
-RUN wget -O - https://bintray.com/ookla/download/download_file?file_path=ookla-speedtest-1.0.0-$(uname -m)-linux.tgz | tar xzvf -
-RUN mv speedtest /
-COPY crontab /etc/crontabs/root
-ENTRYPOINT ["crond", "-f"]
+COPY --from=build /bin/monitor /bin/monitor
+COPY --from=speedtest /bin/speedtest /bin/speedtest
+ENTRYPOINT ["/bin/monitor"]

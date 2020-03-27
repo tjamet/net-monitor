@@ -1,0 +1,87 @@
+{
+    "type": "serverList",
+    "timestamp": "2020-03-25T19:50:11Z",
+    "servers": [
+      {
+        "id": 1695,
+        "name": "Adamo",
+        "location": "Barcelona",
+        "country": "Spain",
+        "host": "speedtest.bcn.adamo.es",
+        "port": 8080
+      },
+      {
+        "id": 21516,
+        "name": "Grupo MasMovil",
+        "location": "Barcelona",
+        "country": "Spain",
+        "host": "speedtest-bcn.masmovil.com",
+        "port": 8080
+      },
+      {
+        "id": 2254,
+        "name": "CSUC",
+        "location": "Barcelona",
+        "country": "Spain",
+        "host": "speedtest.catnix.cat",
+        "port": 8080
+      },
+      {
+        "id": 20672,
+        "name": "apfutura",
+        "location": "Barcelona",
+        "country": "Spain",
+        "host": "msibitnap.apfutura.net",
+        "port": 8080
+      },
+      {
+        "id": 5105,
+        "name": "Eurona Wireless Telecom S.A.",
+        "location": "Barcelona",
+        "country": "Spain",
+        "host": "speedtest.eurona.net",
+        "port": 8080
+      },
+      {
+        "id": 15199,
+        "name": "Meswifi",
+        "location": "Barcelona",
+        "country": "Spain",
+        "host": "speedtest.meswifi.com",
+        "port": 8080
+      },
+      {
+        "id": 14449,
+        "name": "Vodafone ES",
+        "location": "Castelldefels",
+        "country": "Spain",
+        "host": "speedtestbarcelona2.vodafone.es",
+        "port": 8080
+      },
+      {
+        "id": 23765,
+        "name": "GhoFi",
+        "location": "Barcelona",
+        "country": "Spain",
+        "host": "bcn-speedtest.ghofi.net",
+        "port": 8080
+      },
+      {
+        "id": 19146,
+        "name": "Iguana",
+        "location": "Igualada",
+        "country": "Spain",
+        "host": "speedtest.iguana.cat",
+        "port": 8080
+      },
+      {
+        "id": 31702,
+        "name": "Cingles Comunicacions",
+        "location": "Caldes de Montbuí",
+        "country": "Spain",
+        "host": "speedtest.cinglescomunicacions.com",
+        "port": 8080
+      }
+    ]
+  }
+  

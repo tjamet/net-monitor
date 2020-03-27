@@ -1,0 +1,40 @@
+{
+    "type": "result",
+    "timestamp": "2020-03-25T20:00:17Z",
+    "ping": {
+      "jitter": 0.258,
+      "latency": 1.772
+    },
+    "download": {
+      "bandwidth": 75719652,
+      "bytes": 296279624,
+      "elapsed": 3912
+    },
+    "upload": {
+      "bandwidth": 77633718,
+      "bytes": 617548800,
+      "elapsed": 8006
+    },
+    "packetLoss": 0,
+    "isp": "Orange Espana",
+    "interface": {
+      "internalIp": "192.168.1.1",
+      "name": "eth0",
+      "macAddr": "02:42:AC:11:00:03",
+      "isVpn": false,
+      "externalIp": "1.2.3.4"
+    },
+    "server": {
+      "id": 1695,
+      "name": "Adamo",
+      "location": "Barcelona",
+      "country": "Spain",
+      "host": "speedtest.bcn.adamo.es",
+      "port": 8080,
+      "ip": "91.126.225.34"
+    },
+    "result": {
+      "id": "737d1a71-fc33-4f32-acaf-651e977c68fc",
+      "url": "https://www.speedtest.net/result/c/737d1a71-fc33-4f32-acaf-651e977c68fc"
+    }
+  }
