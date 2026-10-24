@@ -11,7 +11,8 @@ COPY bin /src/bin
 RUN CGO_ENABLED=0 go build -a -tags netgo -ldflags '-w' -o /bin/monitor bin/net-monitor/main.go
 
 FROM ${base} as speedtest
-RUN wget -O - https://bintray.com/ookla/download/download_file?file_path=ookla-speedtest-1.0.0-$(uname -m)-linux.tgz | tar xzvf -
+RUN case "$(uname -m)" in armv7l|armv6l) a=armhf;; *) a=$(uname -m);; esac; \
+    wget -O - https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-${a}.tgz | tar xzvf -
 RUN mv speedtest /bin/speedtest
 
 FROM ${base}
