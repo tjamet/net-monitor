@@ -1,0 +1,48 @@
+name: CI
+
+# No branch filter: the Gitea instance and the GitHub mirror may use different
+# default branch names, and one file has to serve both.
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+# The go.mod directive is 1.13, whose toolchain cannot use the runner's GOPROXY
+# (the `|` separator needs Go 1.15). CI therefore runs the current stable
+# toolchain, which builds modules declaring go 1.13 fine; go.mod is unchanged.
+#
+# No lint job: the repo has no linter config.
+#
+# No image workflow: the Dockerfile uses balenalib/%%BALENA_MACHINE_NAME%%
+# placeholders and a dead bintray URL, so it cannot build in plain buildx.
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache: true
+
+      - name: Check formatting
+        run: |
+          unformatted=$(gofmt -l .)
+          if [ -n "$unformatted" ]; then
+            echo "these files are not gofmt'd:"
+            echo "$unformatted"
+            exit 1
+          fi
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Build
+        run: go build ./...
+
+      - name: Test
+        run: go test -race ./...
