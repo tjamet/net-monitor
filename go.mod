@@ -1,6 +1,6 @@
 module github.com/tjamet/net-monitor
 
-go 1.17
+go 1.18
 
 require (
 	github.com/elastic/go-elasticsearch/v7 v7.6.0
