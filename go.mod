@@ -4,7 +4,7 @@ go 1.27.0
 
 require (
 	github.com/elastic/go-elasticsearch/v7 v7.6.0
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.1
 )
 
 require (
