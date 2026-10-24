@@ -1,5 +1,5 @@
-github.com/elastic/go-elasticsearch/v7 v7.9.0 h1:UEau+a1MiiE/F+UrDj60kqIHFWdzU1M2y/YtBU2NC2M=
-github.com/elastic/go-elasticsearch/v7 v7.9.0/go.mod h1:OJ4wdbtDNk5g503kvlHLyErCgQwwzmDtaFC4XyOxXA4=
+github.com/elastic/go-elasticsearch/v7 v7.10.0 h1:vYRwqgFM46ZUHFMRdvKr+y1WA4ehJO6WqAGV9Btbl2o=
+github.com/elastic/go-elasticsearch/v7 v7.10.0/go.mod h1:OJ4wdbtDNk5g503kvlHLyErCgQwwzmDtaFC4XyOxXA4=
 github.com/stretchr/testify v1.12.1 h1:EuwCh5fleGS7H32xRwO3wRGT7DxrDhLAT6FF8MpWDWE=
 github.com/stretchr/testify v1.12.1/go.mod h1:MDEgiDPPsNp5cuIrHPPCyornHKgEVbtFUmoNlxoYthg=
 go.yaml.in/yaml/v3 v3.0.5 h1:N6y/pJk8buWs9NY5ERU2HSMfm+IuD/OtfdAnq6kESPw=
