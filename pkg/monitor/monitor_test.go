@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"net/http"
+	"net/http/httptest"
 	"os"
 	"testing"
 
@@ -196,8 +198,46 @@ func TestLocationUnmarshalJson(t *testing.T) {
 	)
 }
 
+// serveIPAPI points ipAPIBase at a local server replying with the ipapi.json
+// fixture on the given path, and returns the paths requested.
+func serveIPAPI(t *testing.T, path string) *[]string {
+	data, err := ioutil.ReadFile("ipapi.json")
+	assert.NoError(t, err)
+	requested := []string{}
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		requested = append(requested, r.URL.Path)
+		if r.URL.Path != path {
+			http.NotFound(w, r)
+			return
+		}
+		w.Write(data)
+	}))
+	old := ipAPIBase
+	ipAPIBase = srv.URL
+	t.Cleanup(func() {
+		ipAPIBase = old
+		srv.Close()
+	})
+	return &requested
+}
+
 func TestCurrentLocation(t *testing.T) {
+	serveIPAPI(t, "/json/")
 	l, err := CurrentLocation()
 	assert.NoError(t, err)
-	assert.NotNil(t, l)
+	if assert.NotNil(t, l) {
+		assert.Equal(t, "Spain", l.CountryName)
+		assert.Equal(t, "AS12479", l.ASN)
+		assert.Equal(t, 4.3891, l.GeoPoint.Latitude)
+	}
+}
+
+func TestIPLocation(t *testing.T) {
+	requested := serveIPAPI(t, "/8.8.8.8/json/")
+	l, err := IPLocation("8.8.8.8")
+	assert.NoError(t, err)
+	assert.Equal(t, []string{"/8.8.8.8/json/"}, *requested)
+	if assert.NotNil(t, l) {
+		assert.Equal(t, "Madrid", l.CountryCapital)
+	}
 }

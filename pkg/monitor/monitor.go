@@ -269,8 +269,11 @@ func Run(s Tester, preferred ...string) (*TestResult, error) {
 	return s.Test(server)
 }
 
+// ipAPIBase is the ipapi.co endpoint, a variable so tests can point it at a local server.
+var ipAPIBase = "https://ipapi.co"
+
 func CurrentLocation() (*Location, error) {
-	resp, err := http.Get("https://ipapi.co/json/")
+	resp, err := http.Get(ipAPIBase + "/json/")
 	if err != nil {
 		return nil, err
 	}
@@ -280,7 +283,7 @@ func CurrentLocation() (*Location, error) {
 }
 
 func IPLocation(ip string) (*Location, error) {
-	resp, err := http.Get("https://ipapi.co/" + ip + "/json/")
+	resp, err := http.Get(ipAPIBase + "/" + ip + "/json/")
 	if err != nil {
 		return nil, err
 	}
