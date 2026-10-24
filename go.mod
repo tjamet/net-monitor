@@ -3,7 +3,7 @@ module github.com/tjamet/net-monitor
 go 1.27.0
 
 require (
-	github.com/elastic/go-elasticsearch/v7 v7.11.0
+	github.com/elastic/go-elasticsearch/v7 v7.12.0
 	github.com/stretchr/testify v1.12.1
 )
 
