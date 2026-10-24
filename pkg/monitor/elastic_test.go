@@ -14,9 +14,32 @@ type testRoundTripper struct {
 	t *testing.T
 }
 
+// RoundTrip answers like a genuine Elasticsearch: go-elasticsearch >= 7.14
+// rejects responses without the X-Elastic-Product header, and probes "/"
+// before the first request.
 func (t *testRoundTripper) RoundTrip(r *http.Request) (*http.Response, error) {
-	b, err := ioutil.ReadAll(r.Body)
+	resp, err := t.roundTrip(r)
+	if resp != nil {
+		if resp.Header == nil {
+			resp.Header = http.Header{}
+		}
+		resp.Header.Set("X-Elastic-Product", "Elasticsearch")
+	}
+	return resp, err
+}
+
+func (t *testRoundTripper) roundTrip(r *http.Request) (*http.Response, error) {
+	var b []byte
+	var err error
+	if r.Body != nil {
+		b, err = ioutil.ReadAll(r.Body)
+	}
 	switch r.URL.Path {
+	case "/":
+		return &http.Response{
+			StatusCode: http.StatusOK,
+			Body:       ioutil.NopCloser(strings.NewReader(`{}`)),
+		}, nil
 	case "/_mapping":
 		assert.NoError(t.t, err)
 		assert.Equal(t.t, fmt.Sprintf(mappingFormat, "speed-test", version), string(b))
